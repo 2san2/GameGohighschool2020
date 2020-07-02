@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletSpawner : MonoBehaviour
+public class RotationBulletSpawner : MonoBehaviour
 {
 
     // Start is called before the first frame update
     public GameObject m_Bullet;
-   
 
-    public float m_RoattionSpeed = 60f;
+
+    public float m_RoatationSpeed = 60f;
     public float m_AttactInterval = 1f;
     private float m_AttackCooltime = 0f;
 
@@ -27,17 +27,15 @@ public class BulletSpawner : MonoBehaviour
 
         }
 
-       // GameObject.Find("Player");
-       // GameObject.FindGameObjectsWithTag("Player");
-       // GameObject.FindObjectOfType<PlayerController>();
+        transform.Rotate(0, m_RoatationSpeed * Time.deltaTime, 0); 
 
-        GameObject Player = GameObject.FindGameObjectWithTag("Player");
+        //GameObject Player = GameObject.FindGameObjectWithTag("Player");
 
-        if(Player != null)
+      /*  if (Player != null)
         {
             Vector3 attacketPoint = Player.transform.position;
             attacketPoint.y = transform.position.y;
             transform.LookAt(Player.transform);
-        }
+        } */
     }
 }
