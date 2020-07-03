@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+    
 public class Bullet : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_Velocity = transform.forward;
     }
+    public Vector3 m_Velocity;
 
     public float m_Speed = 5f;
 
@@ -19,7 +20,7 @@ public class Bullet : MonoBehaviour
     {
         Rigidbody rigidbody = /*gameObject.*/GetComponent<Rigidbody>();
 
-        rigidbody.AddForce(transform.forward * m_Speed);
+        rigidbody.velocity = m_Velocity * m_Speed;
 
         m_DestoryCooltime -= Time.deltaTime;
 

@@ -9,7 +9,7 @@ public class BulletSpawner : MonoBehaviour
     public GameObject m_Bullet;
    
 
-    public float m_RoattionSpeed = 60f;
+    public float m_RoatationSpeed = 60f;
     public float m_AttactInterval = 1f;
     private float m_AttackCooltime = 0f;
 
@@ -22,6 +22,8 @@ public class BulletSpawner : MonoBehaviour
             GameObject bullet = GameObject.Instantiate(m_Bullet);
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation;
+            var b = bullet.GetComponent<Bullet>();
+            b.m_Velocity = transform.forward;
 
             m_AttackCooltime = 0;
 
