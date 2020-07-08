@@ -5,12 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float m_Speed = 25f;
+    public GameManeger m_GameManeger;
     // Update is called once per frame
     void Update()
     {
         //주석 : 설명 필요없는 스크립트를 임시적으로 비활성화하기 위해서 사용
         /* 주석 */
-        Rigidbody rigidbody = /*gameObject.*/GetComponent<Rigidbody>();
+        Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
 
         float xAxis = Input.GetAxis("Horizontal");
         float yAxis = Input.GetAxis("Vertical");
@@ -27,7 +28,8 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("사망");
-        gameObject.SetActive(false);
-    }
+        Debug.Log("사망");   
+        m_GameManeger.GameOver();
+
+    }             
 }
