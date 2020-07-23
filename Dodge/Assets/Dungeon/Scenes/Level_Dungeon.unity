@@ -1032,7 +1032,7 @@ GameObject:
   - component: {fileID: 686089154}
   - component: {fileID: 686089153}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ClearUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1086,8 +1086,8 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'Game Clear!!!
 
@@ -1195,13 +1195,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 814187085}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 519c480b0a8e1924da6285aecf8c1380, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ad0bfdd7c279eb43b79dcc73b60c0e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartPoint: {fileID: 0}
-  m_Player: {fileID: 0}
-  m_ClearUI: {fileID: 0}
-  m_ScoreUI: {fileID: 0}
+  m_OnEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1958649030}
+        m_MethodName: GameClear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &814187087
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1210,7 +1220,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814187085}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1567,7 +1577,7 @@ GameObject:
   - component: {fileID: 1103938601}
   - component: {fileID: 1103938600}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ScoreUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1589,8 +1599,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1, y: 164}
-  m_SizeDelta: {x: 160, y: 141.90173}
+  m_AnchoredPosition: {x: -0.28, y: 58.5}
+  m_SizeDelta: {x: 382.87335, y: 352.8163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1103938600
 MonoBehaviour:
@@ -3355,7 +3365,7 @@ GameObject:
   - component: {fileID: 1958649031}
   - component: {fileID: 1958649030}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameManeger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3377,6 +3387,8 @@ MonoBehaviour:
   m_Player: {fileID: 2032604239}
   m_ClearUI: {fileID: 686089153}
   m_ScoreUI: {fileID: 1103938600}
+  m_Score: 0
+  m_isPlaying: 0
 --- !u!4 &1958649031
 Transform:
   m_ObjectHideFlags: 0
