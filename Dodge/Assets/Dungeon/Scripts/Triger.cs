@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 public class Triger : MonoBehaviour
 {
-    
-   
     public UnityEvent m_OnEnter;
     private void OnTriggerEnter(Collider other)
     {

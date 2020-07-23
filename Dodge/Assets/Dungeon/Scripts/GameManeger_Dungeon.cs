@@ -1,5 +1,7 @@
+
 ﻿using System;
 using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +14,7 @@ public class GameManeger_Dungeon : MonoBehaviour
 
     public Text m_ClearUI;
     public Text m_ScoreUI;
+
     public float m_Score;
 
     public bool m_isPlaying;
@@ -107,14 +110,16 @@ public class GameManeger_Dungeon : MonoBehaviour
             monoBehaviour.gameObject.SetActive(false);
         }
     }
+
     public void ReturnToStartPoint()
     {
         m_Player.transform.position = m_StartPoint.position;
         m_Player.transform.rotation = m_StartPoint.rotation;
     }
 
+
 }
         
 
        
-      
+

@@ -1577,7 +1577,11 @@ GameObject:
   - component: {fileID: 1103938601}
   - component: {fileID: 1103938600}
   m_Layer: 5
+<<<<<<< HEAD
   m_Name: ScoreUI
+=======
+  m_Name: Text
+>>>>>>> 16a99bf626ddb3bd4991c53030f459e698282d0f
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
