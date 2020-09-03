@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour
         m_isClimbing = false;
 
         m_Animator.SetBool("isClimbing", m_isClimbing);
+
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -114,6 +115,13 @@ public class PlayerController : MonoBehaviour
         {
             m_isTouchLadder = true;
         }
+        else if (collision.tag == "item")
+        {
+            var item = collision.GetComponent<itemComponet>(); //var = 뒤에있는 변수갖다씀
+            item.BeAte();
+            if (item != null)
+                item.BeAte();
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -123,5 +131,6 @@ public class PlayerController : MonoBehaviour
             ClimbingExit();
         }
     }
+    
 
 }
