@@ -102,9 +102,25 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Ground")
+        foreach (ContactPoint2D contact in collision.contacts)
         {
-            m_JumpCount = 0;
+            if(contact.normal.y > 0.5f)
+            {
+                m_JumpCount = 0;
+
+            if (contact.rigidbody)
+                {
+                    var hp = contact.rigidbody.GetComponent<HPComponent>();  
+                    if(hp)
+                    {
+                        Destroy(hp.gameObject);
+                    }
+                }
+            }
+            if (collision.gameObject.tag == "Ground")
+            {
+                m_JumpCount = 0;
+            }
         }
     }
 
