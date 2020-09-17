@@ -16,22 +16,45 @@ public class PlayerController : MonoBehaviour
     public bool m_isTouchLadder = false;
     public bool m_isClimbing = false;
     public float m_ClimbSpeed = 2f;
-
+    public float m_HitRecoveringTime = 0f;
+    public VariableJoystick m_Joystick;
+    private bool m_inputjump = false;
     protected void Start()
     {
       m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
+    }
+    public void Jump()
+    {
+        m_inputjump = true;
     }
     protected void Update()
     {
         float xAxis = Input.GetAxis("Horizontal");
         float yAxis = Input.GetAxis("Vertical");
 
-        if(m_isTouchLadder && Mathf.Abs(yAxis) > 0.5f)
+        xAxis += m_Joystick.Horizontal;
+        yAxis += m_Joystick.Vertical;
+
+
+        var inputJump = m_inputjump;
+        m_inputjump = false;
+        if (m_isTouchLadder && Mathf.Abs(yAxis) > 0.5f)
         {
             m_isClimbing = true;
         }
-        
+        m_HitRecoveringTime -= Time.deltaTime;
+        if (m_HitRecoveringTime > 0)
+        {
+            
+            ClimbingExit();
+            m_Animator.SetBool("TakingDamage", true);
+            return;
+        }
+        else
+        {
+            m_Animator.SetBool("TakingDamage", false);
+        }
 
         if(!m_isClimbing)
         {
@@ -39,17 +62,17 @@ public class PlayerController : MonoBehaviour
             Vector2 velocity = m_Rigidbody2D.velocity;
             velocity.x = xAxis * m_XAxisSpeed;
             m_Rigidbody2D.velocity = velocity;
-            if (Input.GetKeyDown(KeyCode.Space) && m_JumpCount < 2)
+            if ((Input.GetKeyDown(KeyCode.Space) || inputJump) && m_JumpCount < 1) 
             {
                 m_Rigidbody2D.AddForce(Vector3.up * m_YJumpPower);
                 m_JumpCount++;   
             }
 
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (xAxis >= 0)
             {
                 gameObject.transform.localScale = new Vector3(1, 1, 1);
             }
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            else
             {
                 gameObject.transform.localScale = new Vector3(-1, 1, 1);
             }
@@ -102,20 +125,31 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        foreach (ContactPoint2D contact in collision.contacts)
+        foreach (ContactPoint2D contact in collision.contacts) //모든충돌
         {
             if(contact.normal.y > 0.5f)
             {
                 m_JumpCount = 0;
 
-            if (contact.rigidbody)
+                if (contact.rigidbody)
                 {
-                    var hp = contact.rigidbody.GetComponent<HPComponent>();  
-                    if(hp)
+                    var hp = contact.rigidbody.GetComponent<HPComponent>();
+                    if (hp)
                     {
-                        Destroy(hp.gameObject);
+                        hp.TakeDamage(10);
+                        
+                        //Destroy(hp.gameObject);
                     }
                 }
+
+            }
+            else if (contact.rigidbody && contact.rigidbody.tag == "Enemy")
+            {
+                var hp = GetComponent<HPComponent>();
+                hp.TakeDamage(10);
+                m_HitRecoveringTime = 1f;
+
+                m_Animator.SetTrigger("TakeDamage");
             }
             if (collision.gameObject.tag == "Ground")
             {
