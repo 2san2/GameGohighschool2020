@@ -42,3 +42,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackGround
+    uniqueID: 2384851449
+    locked: 0
+  - name: MiddleGround
+    uniqueID: 2629468771
+    locked: 0
+  - name: Plane
+    uniqueID: 3925632335
+    locked: 0
+  - name: Character
+    uniqueID: 1417825515
+    locked: 0
